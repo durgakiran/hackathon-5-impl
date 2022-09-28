@@ -1,0 +1,9 @@
+PeerOrgs:
+  - Name: cs
+    Domain: cs.group
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: cs
+    Users:
+      Start: 1
+      Count: 1

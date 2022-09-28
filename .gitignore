@@ -1,0 +1,61 @@
+**/node_modules/**
+
+organizations/fabric-ca/group/ca-cert.pem
+organizations/fabric-ca/group/tls-cert.pem
+organizations/fabric-ca/group/msp/
+
+organizations/fabric-ca/wdra/ca-cert.pem
+organizations/fabric-ca/wdra/tls-cert.pem
+organizations/fabric-ca/wdra/msp/
+
+organizations/fabric-ca/wdra/ca-cert.pem
+organizations/fabric-ca/wdra/tls-cert.pem
+organizations/fabric-ca/wdra/msp/
+
+organizations/peerOrganizations/wdra/ca-cert.pem
+organizations/peerOrganizations/wdra/tls-cert.pem
+organizations/peerOrganizations/wdra/msp/
+organizations/peerOrganizations/wdra/peers/
+organizations/peerOrganizations/wdra/users/
+organizations/peerOrganizations/wdra/tlsca/
+organizations/peerOrganizations/wdra/ca/
+
+
+organizations/ordererOrganizations/group/ca-cert.pem
+organizations/ordererOrganizations/group/tls-cert.pem
+organizations/ordererOrganizations/group/msp/
+organizations/ordererOrganizations/group/peers/
+organizations/ordererOrganizations/group/users/
+organizations/ordererOrganizations/group/tlsca/
+organizations/ordererOrganizations/group/ca/
+
+
+# Emacs backup files
+*~
+*#
+.#*
+# Vim file artifacts
+.*.sw*
+.DS_Store
+.project
+# omit Go vendor directories
+vendor/
+.vscode
+.gradle
+.idea
+# Dependency directories
+node_modules/
+# Ignore Gradle build output directory
+build
+package-lock.json
+
+# Eclipse
+.classpath
+.settings
+
+# installed Fabric binaries etc.
+bin/
+builders/
+config/
+external-chaincode/
+install-fabric.sh

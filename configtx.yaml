@@ -1,0 +1,292 @@
+Organizations:
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererMSP
+        MSPDir: organizations/ordererOrganizations/group/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('OrdererMSP.member')"
+            Writers:
+                Type: Signature
+                Rule: "OR('OrdererMSP.member')"
+            Admins:
+                Type: Signature
+                Rule: "OR('OrdererMSP.admin')"
+
+    - &wdra
+        Name: wdraMSP
+        ID: wdraMSP
+        MSPDir: organizations/peerOrganizations/wdra.group/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('wdraMSP.admin', 'wdraMSP.peer', 'wdraMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('wdraMSP.admin', 'wdraMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('wdraMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('wdraMSP.peer')"
+        AnchorPeers:
+            - Host: wdra.wdra.group
+              Port: 7051
+
+    # - &cs
+    #     Name: csMSP
+    #     ID: csMSP
+    #     MSPDir: organizations/peerOrganizations/cs.group/msp
+    #     Policies:
+    #         Readers:
+    #             Type: Signature
+    #             Rule: "OR('csMSP.admin', 'csMSP.peer', 'csMSP.client')"
+    #         Writers:
+    #             Type: Signature
+    #             Rule: "OR('csMSP.admin', 'csMSP.client')"
+    #         Admins:
+    #             Type: Signature
+    #             Rule: "OR('csMSP.admin')"
+    #         Endorsement:
+    #             Type: Signature
+    #             Rule: "OR('csMSP.peer')"
+
+    #     AnchorPeers:
+    #         - Host: pucs.cs.group
+    #           Port: 18051
+
+    # - &clm
+    #     Name: clmMSP
+    #     ID: clmMSP
+    #     MSPDir: organizations/peerOrganizations/clm.group/msp
+    #     Policies:
+    #         Readers:
+    #             Type: Signature
+    #             Rule: "OR('clmMSP.admin', 'clmMSP.peer', 'clmMSP.client')"
+    #         Writers:
+    #             Type: Signature
+    #             Rule: "OR('clmMSP.admin', 'clmMSP.client')"
+    #         Admins:
+    #             Type: Signature
+    #             Rule: "OR('clmMSP.admin')"
+    #         Endorsement:
+    #             Type: Signature
+    #             Rule: "OR('clmMSP.peer')"
+
+    #     AnchorPeers:
+    #         - Host: clmn.clm.group
+    #           Port: 22051
+
+    # - &ins
+    #     Name: insMSP
+    #     ID: insMSP
+    #     MSPDir: organizations/peerOrganizations/ins.group/msp
+    #     Policies:
+    #         Readers:
+    #             Type: Signature
+    #             Rule: "OR('insMSP.admin', 'insMSP.peer', 'insMSP.client')"
+    #         Writers:
+    #             Type: Signature
+    #             Rule: "OR('insMSP.admin', 'insMSP.client')"
+    #         Admins:
+    #             Type: Signature
+    #             Rule: "OR('insMSP.admin')"
+    #         Endorsement:
+    #             Type: Signature
+    #             Rule: "OR('insMSP.peer')"
+
+    #     AnchorPeers:
+    #         - Host: puins.ins.group
+    #           Port: 24051
+
+    # - &fis
+    #     Name: fisMSP
+    #     ID: fisMSP
+    #     MSPDir: organizations/peerOrganizations/fis.group/msp
+    #     Policies:
+    #         Readers:
+    #             Type: Signature
+    #             Rule: "OR('fisMSP.admin', 'fisMSP.peer', 'fisMSP.client')"
+    #         Writers:
+    #             Type: Signature
+    #             Rule: "OR('fisMSP.admin', 'fisMSP.client')"
+    #         Admins:
+    #             Type: Signature
+    #             Rule: "OR('fisMSP.admin')"
+    #         Endorsement:
+    #             Type: Signature
+    #             Rule: "OR('fisMSP.peer')"
+
+    #     AnchorPeers:
+    #         - Host: pubank.fis.group
+    #           Port: 14051
+    
+    # - &tralog
+    #     Name: tralogMSP
+    #     ID: tralogMSP
+    #     MSPDir: organizations/peerOrganizations/tralog.group/msp
+    #     Policies:
+    #         Readers:
+    #             Type: Signature
+    #             Rule: "OR('tralogMSP.admin', 'tralogMSP.peer', 'tralogMSP.client')"
+    #         Writers:
+    #             Type: Signature
+    #             Rule: "OR('tralogMSP.admin', 'tralogMSP.client')"
+    #         Admins:
+    #             Type: Signature
+    #             Rule: "OR('tralogMSP.admin')"
+    #         Endorsement:
+    #             Type: Signature
+    #             Rule: "OR('tralogMSP.peer')"
+
+    #     AnchorPeers:
+    #         - Host: nattr.tralog.group
+    #           Port: 26051
+
+Capabilities:
+    Channel: &ChannelCapabilities
+        V2_0: true
+
+    Orderer: &OrdererCapabilities
+        V2_0: true
+
+    Application: &ApplicationCapabilities
+        V2_0: true
+
+Application: &ApplicationDefaults
+    Organizations:
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "ANY Admins"
+        LifecycleEndorsement:
+            Type: ImplicitMeta
+            Rule: "ANY Endorsement"
+        Endorsement:
+            Type: ImplicitMeta
+            Rule: "ANY Endorsement"
+
+    Capabilities:
+        <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+    OrdererType: etcdraft
+    Addresses:
+        - orderer1.group:7050
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+    Organizations:
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "ANY Admins"
+        BlockValidation:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+
+Channel: &ChannelDefaults
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "ANY Admins"
+        Endorsement:
+            Type: ImplicitMeta
+            Rule: "ANY Endorsement"
+
+    Capabilities:
+        <<: *ChannelCapabilities
+
+Profiles:
+    SixOrgsChannel:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *wdra
+                # - *cs
+                # - *clm
+                # - *ins
+                # - *tralog
+                # - *fis
+                  #- *bank
+            Capabilities:
+                <<: *ApplicationCapabilities
+
+    Raft:
+        <<: *ChannelDefaults
+        Capabilities:
+            <<: *ChannelCapabilities
+        Orderer:
+            <<: *OrdererDefaults
+            OrdererType: etcdraft
+            EtcdRaft:
+                Consenters:
+                - Host: orderer1.group
+                  Port: 7050
+                  ClientTLSCert: organizations/ordererOrganizations/group/orderers/orderer1.group/tls/server.crt
+                  ServerTLSCert: organizations/ordererOrganizations/group/orderers/orderer1.group/tls/server.crt
+                - Host: orderer2.group
+                  Port: 7050
+                  ClientTLSCert: organizations/ordererOrganizations/group/orderers/orderer2.group/tls/server.crt
+                  ServerTLSCert: organizations/ordererOrganizations/group/orderers/orderer2.group/tls/server.crt
+                - Host: orderer3.group
+                  Port: 7050
+                  ClientTLSCert: organizations/ordererOrganizations/group/orderers/orderer3.group/tls/server.crt
+                  ServerTLSCert: organizations/ordererOrganizations/group/orderers/orderer3.group/tls/server.crt
+                - Host: orderer4.group
+                  Port: 7050
+                  ClientTLSCert: organizations/ordererOrganizations/group/orderers/orderer4.group/tls/server.crt
+                  ServerTLSCert: organizations/ordererOrganizations/group/orderers/orderer4.group/tls/server.crt
+                - Host: orderer5.group
+                  Port: 7050
+                  ClientTLSCert: organizations/ordererOrganizations/group/orderers/orderer5.group/tls/server.crt
+                  ServerTLSCert: organizations/ordererOrganizations/group/orderers/orderer5.group/tls/server.crt
+            Addresses:
+                - orderer1.group:7050
+                - orderer2.group:7050
+                - orderer3.group:7050
+                - orderer4.group:7050
+                - orderer5.group:7050
+
+            Organizations:
+            - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+            - <<: *OrdererOrg
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                - *wdra
+                # - *cs
+                # - *clm
+                # - *ins
+                # - *fis
+                # - *tralog
+                  #  - *bank

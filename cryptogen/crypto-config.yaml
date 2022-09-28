@@ -1,0 +1,73 @@
+OrdererOrgs:
+
+  - Name: Orderer
+    Domain: group
+    EnableNodeOUs: true
+    Template:
+      Start: 1
+      Count: 5
+
+
+PeerOrgs:
+  - Name: wdra
+    Domain: wdra.group
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: wdra
+      - Hostname: insp
+      - Hostname: dpstr
+    Users:
+      Start: 1
+      Count: 1
+
+  # - Name: cs
+  #   Domain: cs.group
+  #   EnableNodeOUs: true
+  #   Specs:
+  #     - Hostname: pvcs
+  #     - Hostname: pucs
+  #     - Hostname: cco
+  #   Users:
+  #     Start: 1
+  #     Count: 1
+
+
+  # - Name: clm
+  #   Domain: clm.group
+  #   EnableNodeOUs: true
+  #   Specs:
+  #     - Hostname: clmr
+  #     - Hostname: clmn
+  #   Users:
+  #     Count: 1
+
+  # - Name: ins
+  #   Domain: ins.group
+  #   EnableNodeOUs: true
+  #   Specs:
+  #     - Hostname: pvins
+  #     - Hostname: puins
+  #   Users:
+  #     Start: 1
+  #     Count: 1
+
+  # - Name: fis
+  #   Domain: fis.group
+  #   EnableNodeOUs: true
+  #   Specs:
+  #     - Hostname: pubank
+  #     - Hostname: pvbank
+  #     - Hostname: nbfc
+  #   Users:
+  #     Start: 1
+  #     Count: 1
+
+  # - Name: tralog
+  #   Domain: tralog.group
+  #   EnableNodeOUs: true
+  #   Specs:
+  #     - Hostname: regtr
+  #     - Hostname: nattr
+  #   Users:
+  #     Start: 1
+  #     Count: 1
